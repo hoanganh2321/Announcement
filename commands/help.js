@@ -7,12 +7,12 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
       .setTitle('Bot Commands')
-      .setDescription('▶️  **Here are the available commands :**\n‎ ')
+      .setDescription('▶️  ** Dưới đây là các lệnh có sẵn :**\n‎ ')
       .addFields(
-      { name: 'setup', value: 'configue the channel for the bot to send announcements' },
-      { name: 'announce', value: 'Start creating an Embed announcement Message' },
+      { name: 'setup', value: 'Setup kênh để bot gửi thông báo' },
+      { name: 'announce', value: 'Bắt đầu tạo Thông báo nhúng' },
         { name: 'ping', value: 'check the bot\'s latency depends on region' },
-        { name: 'embed', value: 'shows embed example' },
+        { name: 'embed', value: 'Hiển thị ví dụ nhúng' },
     )
 
     message.reply({ embeds: [embed] });
