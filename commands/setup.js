@@ -4,14 +4,14 @@ const path = require('path');
 
 module.exports = {
   name: 'setup',
-  description: 'Set the announcement channel',
+  description: 'Đặt kênh thông báo',
   execute(message, args) {
     if (!message.guild) {
-      return message.reply('This command can only be used in a server (guild).');
+      return message.reply('Lệnh này chỉ có thể được sử dụng trong một máy chủ (guild).');
     }
 
     if (!message.member.permissions.has('MANAGE_GUILD')) {
-      return message.reply('You do not have permission to set the announcement channel.');
+      return message.reply('Bạn không có quyền đặt kênh thông báo.');
     }
 
     const channel = message.mentions.channels.first();
@@ -20,11 +20,11 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor('#0099ff') 
         .setAuthor({
-          name: 'Mention Channel',
+          name: 'Kênh đề cập',
           iconURL: 'https://media.discordapp.net/attachments/1213421081226903552/1213424821170470932/2396-warning.gif',
-          url: 'https://discord.gg/FUEHs7RCqz'
+          url: 'https://discord.gg/XBHZUwqAzK'
         })
-        .setDescription(`Please mention a channel for announcements.\n\n**Usage : ** \`<prefix>setup #channel\``)
+        .setDescription(`Vui lòng đề cập đến một kênh để biết thông báo.\n\n**Use : ** \`!setup #channel\``)
         .setTimestamp();
 
       message.reply({ embeds: [embed] });
@@ -50,11 +50,11 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor('#0099ff') 
         .setAuthor({
-          name: 'Channel Sucessfully set',
+          name: 'Kênh được thiết lập thành công',
           iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213424821673795594/4381-anouncements-animated.gif',
-          url: 'https://discord.gg/FUEHs7RCqz'
+          url: 'https://discord.gg/XBHZUwqAzK'
         })
-        .setDescription(`Announcement channel has been set to ${channel}`)
+        .setDescription(`Kênh thông báo đã được đặt thành ${channel}`)
         .setTimestamp();
 
       message.reply({ embeds: [embed] });
