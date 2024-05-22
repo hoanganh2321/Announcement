@@ -9,7 +9,7 @@ async function askQuestion(message, question, callback, skip = false) {
     .setAuthor({
       name: 'Embed Message',
       iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213422313035407360/8218-alert.gif',
-      url: 'https://discord.gg/FUEHs7RCqz'
+      url: 'https://discord.gg/XBHZUwqAzK'
     })
     .setDescription(question);
 
@@ -39,17 +39,17 @@ async function askQuestion(message, question, callback, skip = false) {
 
   collector.on('end', (collected, reason) => {
     if (reason === 'time') {
-      message.reply('You took too long to answer. Announcement canceled.');
+      message.reply('Bạn mất quá nhiều thời gian để trả lời. Thông báo bị hủy.');
     }
       });
     }
 
     module.exports = {
       name: 'announce',
-      description: 'Send an announcement to the specified channel (Mods Only)',
+      description: 'Gửi thông báo đến kênh được chỉ định (Chỉ Admin)',
       async execute(message, args) {
         if (!message.guild) {
-          return message.reply('This command can only be used in a server (guild).');
+          return message.reply('Lệnh này chỉ có thể được sử dụng trong một máy chủ (bang hội).');
         }
 
         const embed = new EmbedBuilder().setColor('#0099ff');
@@ -61,7 +61,7 @@ async function askQuestion(message, question, callback, skip = false) {
           serverData = require(dataPath);
         } catch (err) {
           console.error('Error reading server data:', err);
-          return message.reply('An error occurred while reading server data. Please try again later.');
+          return message.reply('Đã xảy ra lỗi khi đọc dữ liệu máy chủ. Vui lòng thử lại sau.');
         }
 
         const channelId = serverData[message.guild.id];
@@ -73,43 +73,43 @@ async function askQuestion(message, question, callback, skip = false) {
         const channel = message.guild.channels.cache.get(channelId);
 
         if (!channel) {
-          return message.reply('The announcement channel was not found.');
+          return message.reply('Không tìm thấy kênh thông báo.');
         }
 
         let announcementCompleted = false;
 
-        askQuestion(message, '**1. Enter title for your announcement:**\n- Type **skip** to move to the next step.', (title) => {
+        askQuestion(message, '**1. Nhập tiêu đề cho thông báo của bạn:**\n- Type **skip** để chuyển sang bước tiếp theo.', (title) => {
           if (title.toLowerCase() !== 'skip') {
             embed.setTitle(title);
           }
 
-          askQuestion(message, '**2. Specify the color for the embed:**\n__Examples:__\n\n- #FFFF00 - 💛\n- #FF0000 - ❤️\n- #00FF00 - 💚\n- #0000FF - 💙\n- #FF00FF - 💜\n- #FFFFFF - 🤍\n⭕ **Must enter embed Color**', (color) => {
+          askQuestion(message, '**2. Chỉ định màu cho nhúng:**\n__Examples:__\n\n- #FFFF00 - 💛\n- #FF0000 - ❤️\n- #00FF00 - 💚\n- #0000FF - 💙\n- #FF00FF - 💜\n- #FFFFFF - 🤍\n⭕ **Phải nhập Màu nhúng**', (color) => {
             if (!color.startsWith('#')) {
-              return message.reply('- Color is required!\n- Please use the command again.');
+              return message.reply('- Màu sắc là bắt buộc!\n- Vui lòng sử dụng lại lệnh.');
             }
             embed.setColor(color);
 
-            askQuestion(message, '**3. Write Description of Message:**\n\n- Type **skip** to move to the next step.', (description) => {
+            askQuestion(message, '**3. Viết mô tả tin nhắn:**\n\n- Type **skip** để chuyển sang bước tiếp theo.', (description) => {
               if (description.toLowerCase() !== 'skip') {
                 embed.setDescription(description);
               }
 
-              askQuestion(message, '**4. Do you have an image URL for the announcement:**\n- Type **skip** to move to the next step.', (imageUrl) => {
+              askQuestion(message, '**4. Bạn có URL hình ảnh cho thông báo không:**\n- Type **skip** để chuyển sang bước tiếp theo.', (imageUrl) => {
                 if (imageUrl.toLowerCase() !== 'skip') {
                   embed.setImage(imageUrl);
                 }
 
-                askQuestion(message, '**5. Do you have a thumbnail URL for the announcement:**\n\n- Type **skip** to move to the next step.', (thumbnailUrl) => {
+                askQuestion(message, '**5. Bạn có URL hình thu nhỏ cho thông báo không:**\n\n- Type **skip** để chuyển sang bước tiếp theo.', (thumbnailUrl) => {
                   if (thumbnailUrl.toLowerCase() !== 'skip') {
                     embed.setThumbnail(thumbnailUrl);
                   }
 
-                  askQuestion(message, '**6. Do you want to add a timestamp?**\n- Type **yes** to add a timestamp or **skip** to move to the next step.', (timestampOption) => {
+                  askQuestion(message, '**6. Bạn có muốn thêm dấu thời gian không?**\n- Type **yes** để thêm dấu thời gian hoặc **skip** để chuyển sang bước tiếp theo.', (timestampOption) => {
                     if (timestampOption.toLowerCase() === 'yes') {
                       embed.setTimestamp(new Date());
                     }
 
-                    askQuestion(message, '**7. Do you want to add a footer?**\n- Type **yes** to add a footer or **skip** to finish.', (footerOption) => {
+                    askQuestion(message, '**7. Bạn có muốn thêm chân trang không?**\n- Type **yes** để thêm chân trang hoặc **skip** Để kết thúc.', (footerOption) => {
                       if (footerOption.toLowerCase() === 'yes') {
                         askQuestion(message, 'Enter the footer text:', (footerText) => {
                           embed.setFooter({ text: footerText });
@@ -145,12 +145,12 @@ async function askQuestion(message, question, callback, skip = false) {
                 }
               });
             } else {
-              askQuestion(message, '**9. Do you want to ping everyone or a custom role?**\n- Type **everyone** for everyone, **role** for a specific role, or **skip** to finish.', (pingOption) => {
+              askQuestion(message, '**9. Bạn có muốn ping tất cả mọi người hoặc một vai trò tùy chỉnh?**\n- Type **everyone** for everyone, **role** cho một vai trò cụ thể, hoặc **skip** Để kết thúc.', (pingOption) => {
                 if (pingOption.toLowerCase() === 'everyone') {
-                  message.reply('**🔥 Everyone will be notified with this Ping!**');
+                  message.reply('**🔥 Mọi người sẽ được thông báo với Ping này!**');
                   finalizeAnnouncement('@everyone');
                 } else if (pingOption.toLowerCase() === 'role') {
-                  askQuestion(message, 'Please mention the role or provide the role ID:', (roleInput) => {
+                  askQuestion(message, 'Vui lòng đề cập đến vai trò hoặc cung cấp ID vai trò:', (roleInput) => {
                     const role = message.guild.roles.cache.get(roleInput.replace(/[<@&>]/g, '')) || message.guild.roles.cache.find(r => r.name === roleInput);
                     if (role) {
                       finalizeAnnouncement(`<@&${role.id}>`);
@@ -171,10 +171,10 @@ async function askQuestion(message, question, callback, skip = false) {
             .setAuthor({
               name: 'Confirm your Announcement',
               iconURL: 'https://cdn.discordapp.com/attachments/1213421081226903552/1213431548846800916/5331-fingerprint-loadingicon.gif?',
-              url: 'https://discord.gg/FUEHs7RCqz'
+              url: 'https://discord.gg/XBHZUwqAzK'
             })
             .setColor('#FFFF00')
-            .setDescription('**- Are you sure you want to send this announcement?**');
+            .setDescription('**- Bạn có chắc chắn muốn gửi thông báo này không?**');
 
           const confirm = new ButtonBuilder()
             .setCustomId('confirm')
@@ -204,9 +204,9 @@ async function askQuestion(message, question, callback, skip = false) {
           buttonCollector.on('collect', async (interaction) => {
             if (interaction.customId === 'confirm') {
               await channel.send({ content: pingContent, embeds: [embed] });
-              message.reply('Your Embed message sent successfully!');
+              message.reply('Thư nhúng của bạn đã được gửi thành công!');
             } else if (interaction.customId === 'cancel') {
-              message.reply('Your Embed message canceled!');
+              message.reply('Thư nhúng của bạn đã bị hủy!');
             }
 
             announcementCompleted = true;
@@ -215,7 +215,7 @@ async function askQuestion(message, question, callback, skip = false) {
 
           buttonCollector.on('end', (collected, reason) => {
             if (reason === 'time' && !announcementCompleted) {
-              message.reply('You took too long to respond. Announcement canceled!');
+              message.reply('Bạn mất quá nhiều thời gian để trả lời. Thông báo bị hủy!');
             }
           });
         }
